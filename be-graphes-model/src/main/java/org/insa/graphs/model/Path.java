@@ -202,6 +202,16 @@ public class Path {
      */
     public boolean isValid() {
         // TODO:
+        if(this.isEmpty() || this.size()==1){
+            return true;
+        }
+        List<Arc> listarcs = this.getArcs();
+        for (Arc i : this.getArcs()){
+            if(i.getOrigin() == this.origin){
+                
+
+            }
+        }
         return false;
     }
 
@@ -210,11 +220,18 @@ public class Path {
      * 
      * @return Total length of the path (in meters).
      * 
-     * @deprecated Need to be implemented.
+     * 
      */
     public float getLength() {
         // TODO:
-        return 0;
+        float Pathlength = 0;
+        if(this.isEmpty() || this.size()==1){
+            return 0;
+        }
+        for (Arc i : this.getArcs()){
+            Pathlength = Pathlength + i.getLength();
+        }   
+        return Pathlength;
     }
 
     /**
