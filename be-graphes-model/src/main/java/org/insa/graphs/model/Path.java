@@ -206,12 +206,18 @@ public class Path {
             return true;
         }
         List<Arc> listarcs = this.getArcs();
-        for (Arc i : this.getArcs()){
-            if(i.getOrigin() == this.origin){
-                
+     
+        if(listarcs.get(0).getOrigin().equals(this.origin)){
+
+            for (Arc i : this.getArcs()){
+            
+                if(i.getDestination().equals(.getOrigin()){ // à modifier
+
+                }
 
             }
         }
+        
         return false;
     }
 
