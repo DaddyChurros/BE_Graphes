@@ -245,7 +245,8 @@ public class Path {
      * @deprecated Need to be implemented.
      */
     public double getTravelTime(double speed) {
-        return (this.getLength()/this.speed);
+        double convert = speed*(1000/3600);
+        return (this.getLength()/convert);
     }
 /*suidfghsdmioguhsdmiofushdn */
     /**
