@@ -56,7 +56,7 @@ public class Path {
     public static Path createShortestPathFromNodes(Graph graph, List<Node> nodes)
             throws IllegalArgumentException {
         List<Arc> arcs = new ArrayList<Arc>();
-        // TODO:
+        /*TO DO */
         return new Path(graph, arcs);
     }
 
@@ -228,8 +228,7 @@ public class Path {
      * @deprecated Need to be implemented.
      */
     public double getTravelTime(double speed) {
-        // TODO:
-        return 0;
+        return (getLength()/this.speed);
     }
 
     /**
