@@ -245,9 +245,9 @@ public class Path {
      * @deprecated Need to be implemented.
      */
     public double getTravelTime(double speed) {
-        return (getLength()/this.speed);
+        return (this.getLength()/this.speed);
     }
-
+/*suidfghsdmioguhsdmiofushdn */
     /**
      * Compute the time to travel this path if moving at the maximum allowed speed
      * on every arc.
