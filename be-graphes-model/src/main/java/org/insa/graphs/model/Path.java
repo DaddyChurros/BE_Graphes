@@ -206,12 +206,18 @@ public class Path {
             return true;
         }
         List<Arc> listarcs = this.getArcs();
-        for (Arc i : this.getArcs()){
-            if(i.getOrigin() == this.origin){
-                
+     
+        if(listarcs.get(0).getOrigin().equals(this.origin)){
+
+            for (Arc i : this.getArcs()){
+            
+                if(i.getDestination().equals(.getOrigin()){ // à modifier
+
+                }
 
             }
         }
+        
         return false;
     }
 
@@ -245,8 +251,11 @@ public class Path {
      * @deprecated Need to be implemented.
      */
     public double getTravelTime(double speed) {
-        double convert = speed*(1000/3600);
-        return (this.getLength()/convert);
+
+        float convertion = 36/10;
+        float time = ((this.getLength())/speed*convertion);
+        return time;
+>>>>>>> 7046239e699b13f402ac7372922af549f4e18a0f
     }
 /*suidfghsdmioguhsdmiofushdn */
     /**
