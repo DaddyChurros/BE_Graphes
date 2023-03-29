@@ -252,7 +252,7 @@ public class Path {
      */
     public double getTravelTime(double speed) {
         speed = speed*10/36;
-        double time = ((getLength())/speed);
+        double time = ((this.getLength())/speed);
         return time;
     }
 /*suidfghsdmioguhsdmiofushdn */
@@ -265,8 +265,15 @@ public class Path {
      * @deprecated Need to be implemented.
      */
     public double getMinimumTravelTime() {
-        // TODO:
-        return 0;
+        double time = 0;
+        List<Arc> chemin = this.getArcs();
+        if(this.isEmpty() || this.size()==1){
+            return time;
+        }
+        for (Arc arcs : chemin){
+            time = time + arcs.getMinimumTravelTime();
+        }
+        return time;
     }
 
 }
