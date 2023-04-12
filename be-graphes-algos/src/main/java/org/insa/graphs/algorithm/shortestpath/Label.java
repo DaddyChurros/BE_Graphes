@@ -1,30 +1,48 @@
 package org.insa.graphs.algorithm.shortestpath;
 
 import org.insa.graphs.model.Arc;
-import org.insa.graphs.model.Graph;
+
 import org.insa.graphs.model.Node;
 
-public class Label {
+public class Label  {
 
-    public Node current_node;
-    public boolean marque;
-    private int current_cost;
-    public Arc pere;
+    private Node current_node;
+    private boolean marque;
+    private double current_cost;
+    private Arc pere;
     
-    public Label(Node current, boolean marque, int cost, Arc pere){
-        this.current_node = current;
-        this.marque = marque;
-        this.current_cost = cost;
-        this.pere = pere;
+    public Label(Node current_node){
+        this.current_node = current_node;
+        this.marque = false;
+        this.current_cost = Double.POSITIVE_INFINITY;
+        this.pere = null;
     }
     
-    public int getCost(){
+    public Node getNode(){
+        return this.current_node;
+    }
+
+    public double getCost(){
         return this.current_cost;
     }
-
-    public void linkLabel(Graph graph){
-        final int nb_nodes = graph.size();
-        
-        
+    public Arc getPere(){
+        return this.pere;
     }
+    public void marquer(){
+        this.marque = true;
+    }
+    public boolean getMarque(){
+        return this.marque;
+    }
+
+    public void setCost(double cost){
+        this.current_cost=cost;
+    }
+    public void setPere(Arc pere){
+        this.pere = pere; 
+    }
+    public void setMarque(boolean Marque){
+        this.marque = Marque;
+    }
+
 }
