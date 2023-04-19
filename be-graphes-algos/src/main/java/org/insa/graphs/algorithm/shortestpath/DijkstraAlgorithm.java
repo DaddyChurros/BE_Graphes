@@ -49,74 +49,15 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
     }
     //On met le cout de l'origine a 0
     label[data.getOrigin().getId()].setCost(0);
+    
 
     //Initialisation du tas et de son premier element
     BinaryHeap<Label> heap = new BinaryHeap<>();
+    
     heap.insert(label[data.getOrigin().getId()]);
-/*
-    Graph graph = data.getGraph();
-    boolean found = false;
-    for (int i = 0; !found && i < graph.getNodes().size(); ++i) {
-        found = true;
-        for (Node node: graph.getNodes()) {
-            for (Arc arc: node.getSuccessors()) {
-
-                // Small test to check allowed roads...
-                if (!data.isAllowed(arc)) {
-                    continue;
-                }
-                double costY = label[arc.getDestination().getId()].getCost();
-                double W = data.getCost(arc) + label[arc.getDestination().getId()].getCost();
-                double costX = label[arc.getOrigin().getId()].getCost();
-
-                if(Double.isFinite(costY) && Double.isFinite(costX+W)){
-                    notifyNodeReached(arc.getDestination());
-                }
-                
-                if(costY > costX + W){
-                label[arc.getDestination().getId()].setCost(label[arc.getOrigin().getId()].getCost()+data.getCost(arc));
-                label[arc.getDestination().getId()].setPere(arc);
-
-
-                try{
-                    heap.remove(label[arc.getDestination().getId()]);
-                    heap.insert(label[arc.getDestination().getId()]);
-                }catch(ElementNotFoundException e){
-                    heap.insert(label[arc.getDestination().getId()]);
-                }
-            }
-        }
-    }
-}
+    notifyOriginProcessed(data.getOrigin());
     
-    
-    ShortestPathSolution solution = null;
-
-    if(!label[data.getDestination().getId()].getMarque()){
-        solution = new ShortestPathSolution(data, Status.INFEASIBLE);
-    }
-    else{
-        
-        ArrayList<Arc> arcs = new ArrayList<Arc>();
-        
-        Arc arc= label[data.getDestination().getId()].getPere();
-
-        notifyDestinationReached(data.getDestination());
-        
-        while(arc != null){
-            arcs.add(arc);
-            //arc = label[data.getDestination().getId()].getPere().getOrigin();
-        }
-            Collections.reverse(arcs);
-
-        
-
-            solution = new ShortestPathSolution(data, Status.OPTIMAL, new Path(graph, arcs));
-    }
-    return solution;
-} */
-
-    //On prend le minimum 
+    //Boucle principale
     while(!heap.isEmpty() && label[data.getDestination().getId()].getMarque() != true){
         Label current;
 
@@ -127,7 +68,10 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         }
 
         label[current.getNode().getId()].setMarque(true);
+        notifyNodeMarked(current.getNode());    
+        
 
+        //Liste des successeurs de l'arc current
         for (Arc Successor : data.getGraph().get(current.getNode().getId()).getSuccessors()){
             if (!data.isAllowed(Successor)){
                 continue;
@@ -138,7 +82,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
                 double costX = label[current.getNode().getId()].getCost();
                 
                 if(Double.isInfinite(costY)){
-                    notifyNodeReached(Successor.getDestination());;
+                    notifyNodeReached(Successor.getDestination());
                 }
 
                 if(costY > costX + W){
