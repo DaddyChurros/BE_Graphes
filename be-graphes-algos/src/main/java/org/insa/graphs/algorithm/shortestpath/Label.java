@@ -1,7 +1,5 @@
 package org.insa.graphs.algorithm.shortestpath;
 
-import org.insa.graphs.model.Arc;
-
 import org.insa.graphs.model.Node;
 
 public class Label implements Comparable<Label> {
@@ -38,7 +36,7 @@ public class Label implements Comparable<Label> {
     public void setCost(double cost){
         this.current_cost=cost;
     }
-    public int setPere(int pere){
+    public void setPere(int pere){
         this.pere = pere; 
     }
     public void setMarque(boolean Marque){
@@ -46,6 +44,12 @@ public class Label implements Comparable<Label> {
     }
     public int CompareTo(Label label){
         return Double.compare(this.getCost(), label.getCost());
+    }
+
+    @Override
+    public int compareTo(Label o) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'compareTo'");
     }
 }
 
