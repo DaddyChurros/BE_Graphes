@@ -1,7 +1,7 @@
 package org.insa.graphs.algorithm.shortestpath;
 
 
-
+import org.insa.graphs.algorithm.shortestpath.Label;
 import org.insa.graphs.algorithm.utils.BinaryHeap;
 import org.insa.graphs.algorithm.utils.ElementNotFoundException;
 import org.insa.graphs.algorithm.utils.EmptyPriorityQueueException;
