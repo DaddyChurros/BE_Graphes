@@ -6,7 +6,7 @@ public class Label implements Comparable<Label> {
 
     private Node current_node;
     private boolean marque;
-    private double current_cost;
+    protected double current_cost;
     private Arc pere;
     
     public Label(Node current_node, boolean marque , double current_cost, Arc pere){
@@ -21,6 +21,9 @@ public class Label implements Comparable<Label> {
     }
 
     public double getCost(){
+        return this.current_cost;
+    }
+    public double getTotalCost(){
         return this.current_cost;
     }
     public Arc getPere(){
@@ -44,7 +47,7 @@ public class Label implements Comparable<Label> {
     }
     @Override
     public int compareTo(Label label){
-        return Double.compare(this.getCost(), label.getCost());
+        return Double.compare(this.getTotalCost(), label.getTotalCost());
     }
 }
 

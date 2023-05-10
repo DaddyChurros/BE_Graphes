@@ -37,16 +37,21 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
     public DijkstraAlgorithm(ShortestPathData data) {
         super(data);
     }
-
+    // Creation des labels des nodes 
+    
+    public Label[] creerlabel(ShortestPathData data){
+        Label[] label = new Label[data.getGraph().size()]; 
+        for (int i=0 ; i<data.getGraph().size(); i++){
+            label[i] = new Label(data.getGraph().getNodes().get(i),false, Double.POSITIVE_INFINITY, null);
+        }
+        return label; 
+    }
+   
     @Override
     protected ShortestPathSolution doRun() {
         final ShortestPathData data = getInputData();
-        
-    // Creation des labels des nodes    
-    Label[] label = new Label[data.getGraph().size()];
-    for (int i=0 ; i<data.getGraph().size(); i++){
-        label[i] = new Label(data.getGraph().getNodes().get(i),false, Double.POSITIVE_INFINITY, null);
-    }
+
+    Label[] label= creerlabel(data);
     //On met le cout de l'origine a 0
     label[data.getOrigin().getId()].setCost(0);
     
@@ -100,8 +105,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
                 }
             }
         }
-        }
-
+    }
     ShortestPathSolution solution = null;
 
     if(!label[data.getDestination().getId()].getMarque()){
@@ -123,7 +127,10 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         solution = new ShortestPathSolution(data, Status.OPTIMAL, new Path(data.getGraph(), arcs));
         }
     return solution;
+    
     }
+
+    
 }
  
 
