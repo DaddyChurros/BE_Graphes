@@ -46,15 +46,15 @@ public class Launch {
     public static void main(String[] args) throws Exception {
 
         // Visit these directory to see the list of available files on Commetud.
-        final String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/insa.mapgr";
-        final String pathName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Paths/path_fr31insa_rangueil_r2.path";
-
+        //final String mapName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/insa.mapgr";
+        //final String pathName = "/home/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Paths/path_fr31insa_rangueil_r2.path";
+   
         // Create a graph reader.
-        final GraphReader reader = new BinaryGraphReader(
-                new DataInputStream(new BufferedInputStream(new FileInputStream(mapName))));
+        //final GraphReader reader = new BinaryGraphReader(
+         //       new DataInputStream(new BufferedInputStream(new FileInputStream(mapName))));
 
         // TODO: Read the graph.
-        final Graph graph = null;
+        //final Graph graph = new Graph("insa",mapName,);
 
         // Create the drawing:
         final Drawing drawing = createDrawing();
@@ -67,6 +67,15 @@ public class Launch {
         // TODO: Read the path.
         final Path path = null;
 
+/*
+        int size = graph.getNodes().size();
+		ShortestPathData data = new ShortestPathData(graph, graph.getNodes().get((int) Math.floor(Math.random() * size)),
+				graph.getNodes().get((int) Math.floor(Math.random() * size)), null);
+		DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(data);
+		final Path path = dijkstra.solution();// pathReader.readPath(graph);
+*/
+		// TODO: Draw the path.
+		//drawing.drawPath(path, Color.BLUE);
         // TODO: Draw the path.
     }
 
