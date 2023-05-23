@@ -32,8 +32,6 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         //end while
 
 
-
-
     public DijkstraAlgorithm(ShortestPathData data) {
         super(data);
     }
@@ -116,22 +114,19 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         ArrayList<Arc> arcs = new ArrayList<Arc>();
         
         Arc current = label[data.getDestination().getId()].getPere();
-
         notifyDestinationReached(data.getDestination());
         
         while(current != null){
+           
             arcs.add(current);
             current = label[current.getOrigin().getId()].getPere();
+            
         }
         Collections.reverse(arcs);
         solution = new ShortestPathSolution(data, Status.OPTIMAL, new Path(data.getGraph(), arcs));
         }
     return solution;
     
-    }
-
-    public Path getSolution(){
-        return this.doRun().getPath();
     }
 }
  

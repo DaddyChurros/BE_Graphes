@@ -327,7 +327,7 @@ public class Path {
         double time = ((this.getLength())/speed);
         return time;
     }
-/*suidfghsdmioguhsdmiofushdn */
+
     /**
      * Compute the time to travel this path if moving at the maximum allowed speed
      * on every arc.
