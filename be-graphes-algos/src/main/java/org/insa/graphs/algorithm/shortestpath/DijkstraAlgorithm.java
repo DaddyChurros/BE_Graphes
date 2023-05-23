@@ -48,7 +48,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
     }
    
     @Override
-    public ShortestPathSolution doRun() {
+    protected ShortestPathSolution doRun() {
         final ShortestPathData data = getInputData();
 
     Label[] label= creerlabel(data);

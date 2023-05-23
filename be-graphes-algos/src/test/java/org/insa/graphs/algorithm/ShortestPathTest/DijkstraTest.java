@@ -32,11 +32,13 @@ import org.junit.Test;
 
 public class DijkstraTest{
     private static ShortestPathData dataT,dataT2, dataC, dataH,dataB;
-    private static BellmanFordAlgorithm bell;
-    private static Graph Tls;
 
-    private static ShortestPathSolution algo1;
-   
+    private static Graph Tls,car,hg,bre;
+
+ 
+
+    
+    @BeforeClass
     public static void initAll() throws Exception {
 
         Node Origine , Destination ,Origine2, Destination2, Origine3, Destination3, Origine4, Destination4;
@@ -55,45 +57,48 @@ public class DijkstraTest{
         dataT = new ShortestPathData(Tls, Origine, Destination, ArcInspectorFactory.getAllFilters().get(0));
 
         dataT2 = new ShortestPathData(Tls, Tls.getNodes().get(7174), Tls.getNodes().get(16557), ArcInspectorFactory.getAllFilters().get(0));
-
-        final DijkstraAlgorithm dij_algo1 = new DijkstraAlgorithm(dataT);
-        algo1 = dij_algo1.doRun();
         
-  
+        readerT.close();
         //Cas Carre
 
         final String Carre = "/mnt/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/carre-dense.mapgr";
 
         final GraphReader readerC = new BinaryGraphReader(new DataInputStream(new BufferedInputStream(new FileInputStream(Carre))));
+        car = readerC.read();
 
-        Origine2 = readerC.read().getNodes().get(315979);
-        Destination2 = readerC.read().getNodes().get(78657);
+        Origine2 = car.getNodes().get(315979);
+        Destination2 = car.getNodes().get(78657);
 
-        dataC = new ShortestPathData(readerC.read(), Origine2, Destination2, ArcInspectorFactory.getAllFilters().get(0));
+        dataC = new ShortestPathData(car, Origine2, Destination2, ArcInspectorFactory.getAllFilters().get(0));
         
+
+        readerC.close();
         //Cas Haute Garonne
         
         final String Haute_Garonne = "/mnt/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/haute-garonne.mapgr";
         
         final GraphReader readerH = new BinaryGraphReader(new DataInputStream(new BufferedInputStream(new FileInputStream(Haute_Garonne))));
-        
-        Origine3 = readerH.read().getNodes().get(778);
-        Destination3 = readerH.read().getNodes().get(32568);
+        hg = readerH.read();
 
-        dataH = new ShortestPathData(readerH.read(), Origine3, Destination3, ArcInspectorFactory.getAllFilters().get(0));
+        Origine3 = hg.getNodes().get(778);
+        Destination3 = hg.getNodes().get(32568);
 
+        dataH = new ShortestPathData(hg, Origine3, Destination3, ArcInspectorFactory.getAllFilters().get(0));
+
+        readerH.close();
         //Cas bretagne
 
         final String Bretagne = "/mnt/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/bretagne.mapgr";
 
         final GraphReader readerB = new BinaryGraphReader(new DataInputStream(new BufferedInputStream(new FileInputStream(Bretagne))));
+        bre = readerB.read();
 
-        Origine4 = readerB.read().getNodes().get(657101);
-        Destination4 = readerB.read().getNodes().get(56068);
+        Origine4 = bre.getNodes().get(657101);
+        Destination4 = bre.getNodes().get(56068);
 
 
-        dataB = new ShortestPathData(readerB.read(), Origine4, Destination4, ArcInspectorFactory.getAllFilters().get(0));
-
+        dataB = new ShortestPathData(bre, Origine4, Destination4, ArcInspectorFactory.getAllFilters().get(0));
+        readerB.close();
     }
 
     //Pb à tester chemin inexistant, chemin de longueur nulle, trajet court,trajet long
@@ -105,13 +110,11 @@ public class DijkstraTest{
             //algo valide?
             assertTrue(new DijkstraAlgorithm(dataT).getSolution().isValid());
             //Dijkstra renvoie le même resultat que bellman
-            assertEquals(new BellmanFordAlgorithm(dataT).getSolution().getLength(),new DijkstraAlgorithm(dataT).getSolution().getLength(),1e-6);
+            assertEquals(new BellmanFordAlgorithm(dataT).run().getPath().getLength(),new DijkstraAlgorithm(dataT).run().getPath().getLength(),0);
             
             //Est ce que Dijkstra renvoie un chemin different
             assertNotEquals(new DijkstraAlgorithm(dataT), new DijkstraAlgorithm((dataT2)));
 
-
-            
         }   
 
         @Test
@@ -121,7 +124,7 @@ public class DijkstraTest{
             assertFalse(new DijkstraAlgorithm(dataB).getSolution().isValid());
             
             //Dijkstra renvoie le même resultat que bellman
-            assertFalse(new DijkstraAlgorithm(dataB).getDoRun().isFeasible());
+            assertFalse(new DijkstraAlgorithm(dataB).run().isFeasible());
             
         }
 
