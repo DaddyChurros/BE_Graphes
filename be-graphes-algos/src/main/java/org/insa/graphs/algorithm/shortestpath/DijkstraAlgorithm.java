@@ -48,7 +48,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
     }
    
     @Override
-    protected ShortestPathSolution doRun() {
+    public ShortestPathSolution doRun() {
         final ShortestPathData data = getInputData();
 
     Label[] label= creerlabel(data);
@@ -130,7 +130,9 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
     
     }
 
-    
+    public Path getSolution(){
+        return this.doRun().getPath();
+    }
 }
  
 

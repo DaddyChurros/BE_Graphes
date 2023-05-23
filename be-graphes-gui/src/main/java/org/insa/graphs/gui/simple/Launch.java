@@ -51,15 +51,14 @@ public class Launch {
 	public static void main(String[] args) throws Exception {
 
 		// Visit these directory to see the list of available files on Commetud.
-		final String mapName = "/mnt/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/carre.mapgr";
+		final String Toulouse = "/mnt/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/toulouse.mapgr";
 		final String pathName = "/mnt/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Paths/path_fr31_insa_bikini_canal.path";
 
 		// Create a graph reader.
-		final GraphReader reader = new BinaryGraphReader(
-				new DataInputStream(new BufferedInputStream(new FileInputStream(mapName))));
+		final GraphReader readerT = new BinaryGraphReader(new DataInputStream(new BufferedInputStream(new FileInputStream(Toulouse))));;
 
 		// TODO: Read the graph.
-		final Graph graph = reader.read();
+		final Graph graph = readerT.read();
 
 		// Create the drawing:
 		final Drawing drawing = createDrawing();
