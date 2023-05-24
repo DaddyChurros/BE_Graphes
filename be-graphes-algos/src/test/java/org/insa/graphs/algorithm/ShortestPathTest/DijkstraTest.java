@@ -153,6 +153,7 @@ public class DijkstraTest {
 
         // Est-ce que le chemin est optimal?
         assertEquals(Status.OPTIMAL, new DijkstraAlgorithm(dataH).run().getStatus());
-
+        // a tester avec les filtres 
+        assertTrue(new DijkstraAlgorithm(dataH).run().getPath().getMinimumTravelTime()<new DijkstraAlgorithm(dataH).run().getPath().getLength());
     }
 }
