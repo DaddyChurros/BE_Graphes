@@ -1,11 +1,7 @@
 package org.insa.graphs.algorithm.shortestpath;
 
-
-
 import java.util.ArrayList;
 import java.util.Collections;
-
-import org.insa.graphs.algorithm.AbstractInputData;
 import org.insa.graphs.algorithm.AbstractSolution.Status;
 import org.insa.graphs.algorithm.utils.BinaryHeap;
 import org.insa.graphs.algorithm.utils.ElementNotFoundException;

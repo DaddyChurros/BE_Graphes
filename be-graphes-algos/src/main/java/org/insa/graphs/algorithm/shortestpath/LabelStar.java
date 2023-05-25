@@ -1,7 +1,4 @@
 package org.insa.graphs.algorithm.shortestpath;
-import javax.print.attribute.standard.MediaSize.Other;
-
-import org.insa.graphs.algorithm.AbstractInputData;
 import org.insa.graphs.model.*;
 
 public class LabelStar extends Label{

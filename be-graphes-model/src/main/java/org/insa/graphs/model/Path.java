@@ -91,9 +91,6 @@ public class Path {
     public static Path createShortestPathFromNodes(Graph graph, List<Node> nodes)
             throws IllegalArgumentException {
         List<Arc> arcs = new ArrayList<Arc>();
-        Arc current= null ;
-        float tmplength = 1000;
-        
             for (int i = 0 ; i < nodes.size()-1; i++){
                 Boolean existe =false;
                 for (Arc successeur : nodes.get(i).getSuccessors()){

@@ -4,12 +4,13 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
+
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import org.insa.graphs.algorithm.ArcInspectorFactory;
-import org.insa.graphs.algorithm.shortestpath.BellmanFordAlgorithm;
 import org.insa.graphs.algorithm.shortestpath.DijkstraAlgorithm;
+import org.insa.graphs.algorithm.shortestpath.AStarAlgorithm;
 import org.insa.graphs.algorithm.shortestpath.ShortestPathData;
 import org.insa.graphs.model.*;
 import org.insa.graphs.model.io.GraphReader;
@@ -17,7 +18,7 @@ import org.insa.graphs.model.io.BinaryGraphReader;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class DijkstraTest {
+public class AStarTest {
     private static ShortestPathData dataT, dataT2, dataT3, dataC, dataH,dataHtps,dataHlg, dataB;
 
     private static Graph Tls, car, hg, bre;
@@ -97,17 +98,17 @@ public class DijkstraTest {
 
     public void TestToulouse() {
         // Est-ce que la solution est valide?
-        assertTrue(new DijkstraAlgorithm(dataT).run().getPath().isValid());
-        // Dijkstra renvoie le même resultat que Bellman
-        assertEquals(new BellmanFordAlgorithm(dataT).run().getPath().getLength(),
-                new DijkstraAlgorithm(dataT).run().getPath().getLength(), 0);
+        assertTrue(new AStarAlgorithm(dataT).run().getPath().isValid());
+        // AStar renvoie le même resultat que Dijkstra
+        assertEquals(new DijkstraAlgorithm(dataT).run().getPath().getLength(),
+                new AStarAlgorithm(dataT).run().getPath().getLength(), 0);
 
-        // Est ce que Dijkstra renvoie un chemin different avec des données différentes
-        assertNotEquals(new DijkstraAlgorithm(dataT), new DijkstraAlgorithm((dataT2)));
+        // Est ce que AStar renvoie un chemin different avec des données différentes
+        assertNotEquals(new AStarAlgorithm(dataT), new AStarAlgorithm((dataT2)));
 
         // Chemin de longueur nulle
-        assertEquals(null,new DijkstraAlgorithm(dataT3).run().getPath().getLength(),0,0);
-        assertTrue(new DijkstraAlgorithm(dataT3).run().getPath().isValid());
+        assertEquals(null,new AStarAlgorithm(dataT3).run().getPath().getLength(),0,0);
+        assertTrue(new AStarAlgorithm(dataT3).run().getPath().isValid());
 
     }
 
@@ -116,7 +117,7 @@ public class DijkstraTest {
     public void TestCheminInexistant() { //Carte Bretagne
         // Est-ce que l'algo est réalisable? Ici non car il n'y a pas de chemin entre
         // les deux sommets.
-        assertFalse(new DijkstraAlgorithm(dataB).run().isFeasible());
+        assertFalse(new AStarAlgorithm(dataB).run().isFeasible());
 
     }
 
@@ -124,19 +125,21 @@ public class DijkstraTest {
 
     public void TestCarre() {
         // Est-ce que la solution est valide?
-        assertTrue(new DijkstraAlgorithm(dataC).run().getPath().isValid());
-        // Dijkstra renvoie le même resultat que Bellman
-        assertEquals(new BellmanFordAlgorithm(dataC).run().getPath().getLength(),new DijkstraAlgorithm(dataC).run().getPath().getLength(), 0);
+        assertTrue(new AStarAlgorithm(dataC).run().getPath().isValid());
+        // AStar renvoie le même resultat que Dijkstra
+        assertEquals(new DijkstraAlgorithm(dataC).run().getPath().getLength(),new AStarAlgorithm(dataC).run().getPath().getLength(), 0);
     }
 
     @Test
 
     public void TestCheminLong() {
         // Est-ce que le chemin est realisable?
-        assertTrue(new DijkstraAlgorithm(dataH).run().isFeasible());
+        assertTrue(new AStarAlgorithm(dataH).run().isFeasible());
 
         //On teste si les parcours en temps et en longueur sont bien optimaux dans leur donnée éponyme
-        assertTrue(new DijkstraAlgorithm(dataHlg).run().getPath().getLength()<= new DijkstraAlgorithm(dataHtps).run().getPath().getLength());
-        assertTrue(new DijkstraAlgorithm(dataHtps).run().getPath().getMinimumTravelTime()<= new DijkstraAlgorithm(dataHlg).run().getPath().getMinimumTravelTime());
+        assertTrue(new AStarAlgorithm(dataHlg).run().getPath().getLength()<= new AStarAlgorithm(dataHtps).run().getPath().getLength());
+        //L'optimisation A* de Dijkstra en longueur montre bien qu'il est meilleur en longueur et en temps
+        assertFalse(new AStarAlgorithm(dataHtps).run().getPath().getMinimumTravelTime()<= new AStarAlgorithm(dataHlg).run().getPath().getMinimumTravelTime());
     }  
 }
+
